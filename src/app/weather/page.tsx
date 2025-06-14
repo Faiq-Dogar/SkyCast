@@ -3,6 +3,7 @@ import { Box, Divider, Typography } from "@mui/material";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import AirQuality from "./airQuality/page";
 import { Droplet, Gauge, Moon, Sun, Sunrise, Sunset, Wind } from "lucide-react";
 
 interface TemperatureResults {
@@ -225,6 +226,8 @@ const page = () => {
               </p>
             </div>
           </div>
+          <hr className="my-5 w-10 mx-auto" />
+          <AirQuality temperatureResults={temperatureResults} />
         </>
       )}
     </div>
