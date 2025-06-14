@@ -182,6 +182,49 @@ const page = () => {
           >
             Feels like {temperatureResults?.current.feelslike}°c
           </Typography>
+          <hr className="my-5 w-10 mx-auto" />
+          <div className="flex justify-around items-center px-5 mt-13 lg:mx-80">
+            <div className="flex flex-col items-center">
+              <Droplet className="text-gray-300 mb-1" fontSize="small" />
+              <p className="text-xs text-gray-300">HUMIDTY</p>
+              <p className="text-sm text-gray-300">
+                {temperatureResults?.current.humidity} %
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <Wind className="text-gray-300 mb-1" fontSize="small" />
+              <p className="text-xs text-gray-300">WIND</p>
+              <p className="text-sm text-gray-300">
+                {temperatureResults?.current.wind_speed} m/s
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-between items-center px-5 mt-6 lg:mx-80">
+            <div className="flex flex-col items-center">
+              <Sunrise className="text-gray-300 mb-1" fontSize="small" />
+              <p className="text-xs text-gray-300">SUNRISE</p>
+              <p className="text-sm text-gray-300">
+                {temperatureResults?.current.astro.sunrise}
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <Gauge className="text-gray-300 mb-1" fontSize="small" />
+              <p className="text-xs text-gray-300">pressure</p>
+              <p className="text-sm text-gray-300">
+                {temperatureResults?.current.pressure} hPa
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <Sunset className="text-gray-300 mb-1" fontSize="small" />
+              <p className="text-xs text-gray-300">SUNSET</p>
+              <p className="text-sm text-gray-300">
+                {temperatureResults?.current.astro.sunset}
+              </p>
+            </div>
+          </div>
         </>
       )}
     </div>

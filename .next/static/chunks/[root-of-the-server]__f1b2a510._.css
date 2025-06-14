@@ -1236,6 +1236,30 @@
     --tw-outline-style: none;
     outline-style: none;
   }
+
+  @media (width >= 64rem) {
+    .lg\:mx-10 {
+      margin-inline: calc(var(--spacing) * 10);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .lg\:mx-30 {
+      margin-inline: calc(var(--spacing) * 30);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .lg\:mx-60 {
+      margin-inline: calc(var(--spacing) * 60);
+    }
+  }
+
+  @media (width >= 64rem) {
+    .lg\:mx-80 {
+      margin-inline: calc(var(--spacing) * 80);
+    }
+  }
 }
 
 :root {
