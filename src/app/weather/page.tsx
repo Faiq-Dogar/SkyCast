@@ -58,24 +58,8 @@ const page = () => {
     useState<TemperatureResults | null>(null);
   const isMobile = useMediaQuery("(max-width:599px)");
 
-  const fetchWeather = async () => {
-    const url = `https://api.weatherstack.com/current?access_key=66348045735da7a91606194a47e44af9&query=${city}`;
-    const options = {
-      method: "GET",
-    };
-
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      console.log(result);
-      setTemperatureResults(result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   useEffect(() => {
     setMounted(true);
-    // fetchWeather();
     setTemperatureResults({
       location: {
         name: "New Delhi",
@@ -126,8 +110,19 @@ const page = () => {
   if (!mounted) return null;
 
   return (
-    <div className="h-full min-h-screen pt-20 text-center font-thin relative overflow-hidden">
+    <div className="h-full min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 text-white pt-20 text-center font-thin relative overflow-hidden">
       {" "}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-yellow-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-pink-300/15 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute bottom-10 right-10 w-64 h-64 bg-purple-300/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+
+        {/* Floating particles */}
+        <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-white/30 rounded-full animate-bounce delay-300"></div>
+        <div className="absolute top-1/2 right-1/4 w-3 h-3 bg-yellow-200/40 rounded-full animate-bounce delay-700"></div>
+        <div className="absolute bottom-1/3 left-1/5 w-2 h-2 bg-pink-200/30 rounded-full animate-bounce delay-1000"></div>
+      </div>
       {temperatureResults && (
         <>
           <Typography
