@@ -51,6 +51,8 @@ interface TemperatureResults {
 }
 
 const page = () => {
+  const apiKey = process.env.NEXT_PUBLIC_API;
+  console.log("ApiKey: ", apiKey);
   const [mounted, setMounted] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -59,53 +61,24 @@ const page = () => {
     useState<TemperatureResults | null>(null);
   const isMobile = useMediaQuery("(max-width:599px)");
 
+  const fetchWeather = async () => {
+    const url = `${apiKey}=${city}`;
+    const options = {
+      method: "GET",
+    };
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      console.log(result);
+      setTemperatureResults(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     setMounted(true);
-    setTemperatureResults({
-      location: {
-        name: "New Delhi",
-        country: "India",
-        region: "Delhi",
-        lat: "28.600",
-        lon: "77.200",
-        timezone_id: "Asia/Kolkata",
-        localtime: "2023-06-13 02:38",
-        localtime_epoch: 1686683880,
-        utc_offset: "5.50",
-      },
-      current: {
-        observation_time: "03:08 PM",
-        temperature: 39,
-        weather_code: 113,
-        weather_icons: [
-          "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png",
-        ],
-        weather_descriptions: ["Sunny"],
-        wind_speed: 13, //1
-        wind_degree: 280,
-        wind_dir: "W",
-        pressure: 1007, //2
-        precip: 0,
-        humidity: 16, //3
-        cloudcover: 0,
-        feelslike: 40,
-        uv_index: 7, //4
-        visibility: 10,
-        is_day: "yes",
-        astro: {
-          sunrise: "06:31 AM",
-          sunset: "05:47 PM",
-        },
-        air_quality: {
-          co: "468.05",
-          no2: "32.005",
-          o3: "55",
-          so2: "7.4",
-          pm2_5: "6.66",
-          pm10: "6.66",
-        },
-      },
-    });
+    fetchWeather();
   }, []);
 
   if (!mounted) return null;
