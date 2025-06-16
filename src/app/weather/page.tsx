@@ -1,9 +1,9 @@
 "use client";
-import { Box, Divider, Typography } from "@mui/material";
-import { useSearchParams, useRouter } from "next/navigation";
+import { Box, Typography } from "@mui/material";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import AirQuality from "./airQuality/page";
+import AirQuality from "./airQuality/Page";
 import { Droplet, Gauge, Moon, Sun, Sunrise, Sunset, Wind } from "lucide-react";
 
 interface TemperatureResults {
@@ -50,34 +50,32 @@ interface TemperatureResults {
   };
 }
 
-const page = () => {
+const Page = () => {
   const apiKey = process.env.NEXT_PUBLIC_API;
   console.log("ApiKey: ", apiKey);
   const [mounted, setMounted] = useState(false);
   const searchParams = useSearchParams();
-  const router = useRouter();
   const city = searchParams.get("city") || "Faisalabad";
   const [temperatureResults, setTemperatureResults] =
     useState<TemperatureResults | null>(null);
   const isMobile = useMediaQuery("(max-width:599px)");
 
-  const fetchWeather = async () => {
-    const url = `${apiKey}=${city}`;
-    const options = {
-      method: "GET",
-    };
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      console.log(result);
-      setTemperatureResults(result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     setMounted(true);
+    const fetchWeather = async () => {
+      const url = `${apiKey}=${city}`;
+      const options = {
+        method: "GET",
+      };
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result);
+        setTemperatureResults(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchWeather();
   }, []);
 
@@ -97,7 +95,7 @@ const page = () => {
         <div className="absolute top-1/2 right-1/4 w-3 h-3 bg-yellow-200/40 rounded-full animate-bounce delay-700"></div>
         <div className="absolute bottom-1/3 left-1/5 w-2 h-2 bg-pink-200/30 rounded-full animate-bounce delay-1000"></div>
       </div>
-      {temperatureResults && (
+      {temperatureResults?.location && (
         <>
           <Typography
             variant={isMobile ? "body1" : "h1"}
@@ -207,4 +205,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

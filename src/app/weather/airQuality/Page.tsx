@@ -1,3 +1,4 @@
+"use client";
 import { Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 
@@ -48,7 +49,7 @@ interface AirQualityProps {
   temperatureResults: TemperatureResults;
 }
 
-const page: React.FC<AirQualityProps> = ({ temperatureResults }) => {
+const Page: React.FC<AirQualityProps> = ({ temperatureResults }) => {
   const isMobile = useMediaQuery("(max-width:599px)");
 
   return (
@@ -102,4 +103,4 @@ const page: React.FC<AirQualityProps> = ({ temperatureResults }) => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, MapPin, Cloud } from "lucide-react";
 
@@ -10,9 +10,11 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
-  useState(() => {
+  useEffect(() => {
     setMounted(true);
-  });
+  }, []);
+
+  if (!mounted) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
